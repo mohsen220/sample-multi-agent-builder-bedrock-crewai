@@ -1,0 +1,8 @@
+{
+    "account": "YOUR_AWS_ACCOUNT_ID",
+    "region": "YOUR_AWS_REGION",
+    "connection": "YOUR_GITHUB_CONNECTION_ARN",
+    "user": "YOUR_GITHUB_USERNAME",
+    "repo": "sample-multi-agent-builder-bedrock-crewai",
+    "branch": "main"
+  }

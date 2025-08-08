@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "Amazon Bedrock & CrewAI Multi-Agent Builder"
+version = "0.1.0"
+description = ""
+authors = ["Arya Subramanyam <aryasub@amazon.com>", "Mohsen Lhaf <mohsenlh@amazon.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.11.0,<3.12.0"
+crewai = "0.76.9"
+python-dotenv = "1.0.0"
+fastapi = {version = "0.115.2", extras = ["all"]}  # Latest version with all security features
+uvicorn = {version = "0.27.1", extras = ["standard"]}  # Latest stable version
+crewai-tools = "0.13.4"
+pillow = "10.4.0"
+langchain = "0.3.6"
+langchain-aws = "0.2.6"
+aiohttp = "3.10.11"
+jinja2 = "3.1.6"
+cryptography = "42.0.6"  # Original version
+h11 = "0.14.0"  # Original version
+starlette = "0.40.0"  # Explicitly pinned to patched version for DoS protection
+# litellm has been completely removed due to multiple critical vulnerabilities including API key leakage
+
+[tool.poetry.extras]
+# Define extras to avoid litellm
+no-litellm = []
+
+[tool.poetry.group.dev.dependencies]
+# Empty dev dependencies
+
+[tool.pyright]
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+useLibraryCodeForTypes = true
+exclude = [".cache"]
+
+[tool.ruff]
+# https://beta.ruff.rs/docs/configuration/
+select = ['E', 'W', 'F', 'I', 'B', 'C4', 'ARG', 'SIM']
+ignore = ['W291', 'W292', 'W293']
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
