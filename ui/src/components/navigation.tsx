@@ -3,7 +3,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SideNavigation, { SideNavigationProps } from '@cloudscape-design/components/side-navigation';
-import LanguageSwitcher from './language-switcher';
 import Box from '@cloudscape-design/components/box';
 
 const navHeader = { text: 'Amazon Bedrock & CrewAI Multi-Agent Builder', href: '/' };
@@ -71,9 +70,6 @@ export function Navigation({
                 activeHref={window.location.href.substring(window.location.href.lastIndexOf('/') + 1)} 
                 onFollow={onFollowHandler} 
             />
-            <Box padding="s">
-                <LanguageSwitcher />
-            </Box>
         </>
     );
 }

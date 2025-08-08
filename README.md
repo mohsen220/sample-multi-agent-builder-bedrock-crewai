@@ -48,14 +48,17 @@ This project provides a no-code platform for building and orchestrating multi-ag
 
 1. Create a GitHub [connection](https://docs.aws.amazon.com/dtconsole/latest/userguide/connections-create-github.html) for CI/CD integration in the AWS Console.
 
-2. Configure your project by creating a `cdk.context.json` file in the root directory with the following structure (replace the placeholder values with your actual information):
+
+2. Fork this repository
+
+3. Configure your project by creating a `cdk.context.json` file in the root directory with the following structure (replace the placeholder values with your actual information):
    ```json
    {
      "account": "YOUR_AWS_ACCOUNT_ID",
      "region": "YOUR_AWS_REGION",
      "connection": "YOUR_GITHUB_CONNECTION_ARN",
      "user": "YOUR_GITHUB_USERNAME",
-     "repo": "multi-agent-project",
+     "repo": "sample-multi-agent-builder-bedrock-crewai",
      "branch": "main"
    }
    ```
@@ -161,9 +164,8 @@ To remove all deployed resources from your AWS account:
 cdk destroy
 ```
 
-2. If you've deployed the UI to Amplify, delete the Amplify app from the AWS Console.
-
-3. Check for any remaining resources like S3 buckets or ECR repositories and delete them manually if needed.
+2. Manually delete the `Deploy-MultiAgentProjectStack` from the CloudFormation console. 
+3. Empty and delete the S3 bucket that starts with `multiagenttoolchainstack-`
 
 ## FAQ
 
