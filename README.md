@@ -38,7 +38,7 @@ This project provides a no-code platform for building and orchestrating multi-ag
 - [Poetry](https://python-poetry.org/docs/#installation) >= 1.4.0 for Python dependency management
 - (optional) [Docker](https://www.docker.com/get-started) >= 20.10.x for local container testing only
 
-2. In your chosen AWS Account, ensure that the following models are enabled in Amazon Bedrock by [adding model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html#model-access-add):
+2. In your chosen AWS Account and region, ensure that the following models are enabled in Amazon Bedrock by [adding model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html#model-access-add):
    - Anthropic Claude 3 Haiku
    - Stability AI's Stable Image Ultra V1
 
