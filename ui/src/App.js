@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2025 Multi-Agent Project Contributors
+ * Copyright (c) 2025 Amazon Bedrock & CrewAI Multi-Agent Builder Contributors
  * 
  * Licensed under the MIT License. See LICENSE file in the project root for full license information.
  */

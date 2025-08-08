@@ -37,13 +37,6 @@ export class MultiAgentToolchainStack extends cdk.Stack {
       commands: [
         // Install dependencies
         'npm ci',
-        // Generate config first
-        'npm run generate-config',
-        'cat .env',
-        // Copy .env to UI directory
-        'cp .env ui/.env',
-        'echo "Copied .env to ui/.env"',
-        'cat ui/.env',
         // Build UI with the generated config
         'cd ui',
         'npm i',
@@ -151,7 +144,7 @@ export class MultiAgentToolchainStack extends cdk.Stack {
         region: scope.node.tryGetContext('region')
       }
     });
-    
+
     const deployStage = pipeline.addStage(deploy);
 
     // Add a post-deployment step to generate config and build UI

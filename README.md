@@ -38,7 +38,7 @@ This project provides a no-code platform for building and orchestrating multi-ag
 - [Poetry](https://python-poetry.org/docs/#installation) >= 1.4.0 for Python dependency management
 - (optional) [Docker](https://www.docker.com/get-started) >= 20.10.x for local container testing only
 
-2. In your chosen AWS Account and region, ensure that the following models are enabled in Amazon Bedrock by [adding model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html#model-access-add):
+2. In your chosen AWS Account in us-west-2, ensure that the following models are enabled in Amazon Bedrock by [adding model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html#model-access-add):
    - Anthropic Claude 3 Haiku
    - Stability AI's Stable Image Ultra V1
 
@@ -46,16 +46,15 @@ This project provides a no-code platform for building and orchestrating multi-ag
 
 ### 1. AWS Connection Setup & Context File Creation
 
-1. Create a GitHub [connection](https://docs.aws.amazon.com/dtconsole/latest/userguide/connections-create-github.html) for CI/CD integration in the AWS Console.
+1. Fork this repository
 
-
-2. Fork this repository
+2. Create a GitHub [connection](https://docs.aws.amazon.com/dtconsole/latest/userguide/connections-create-github.html) for CI/CD integration in the AWS Console.
 
 3. Configure your project by creating a `cdk.context.json` file in the root directory with the following structure (replace the placeholder values with your actual information):
    ```json
    {
      "account": "YOUR_AWS_ACCOUNT_ID",
-     "region": "YOUR_AWS_REGION",
+     "region": "us-west-2",
      "connection": "YOUR_GITHUB_CONNECTION_ARN",
      "user": "YOUR_GITHUB_USERNAME",
      "repo": "sample-multi-agent-builder-bedrock-crewai",
@@ -96,14 +95,14 @@ This project provides a no-code platform for building and orchestrating multi-ag
 
 2. Build Cloudformation Stacks (Note: make sure you're at the root)
 
-```bash
- npm run build
- cdk deploy
-```
+   ```bash
+   npm run build
+   cdk deploy
+   ```
 
 3. (No action required here, fyi) You will see a new CloudFormation Stack called `MultiAgentToolchainStack` created in your AWS Account. Once it is successfully created, it provisions a CodePipeline called `MultiAgentProjectPipeline` which will deploy the infrastructure including backend APIs and UI. When the pipeline completes, you can find these resources in a newly created CloudFormation Stack called `Deploy-MultiAgentProjectStack`.
 
-4. To view the application, visit the `Deploy-MultiAgentProjectStack` Stack in the AWS CloudFormation Console one it is completed (~10 mins), select the Outputs Tab and click on the link generated with name `UIUrl`. 
+4. To view the application, visit the `Deploy-MultiAgentProjectStack` Stack in the AWS CloudFormation Console one it is completed (~15 mins), select the Outputs Tab and click on the link generated with name `UIUrl`. 
 
 ## (optional) Local Development
 
@@ -111,25 +110,25 @@ You can run both the UI and API components locally for development:
 
 1. For the UI component:
 
-```bash
-cd ui
-npm start
-```
+   ```bash
+   cd ui
+   npm start
+   ```
 
 The UI will be available at http://localhost:3000/
 
 2. For the Crew AI App component:
 
-```bash
-cd agents-api
-python3 -m venv venv
-source venv/bin/activate  # On Linux/macOS
-# OR
-.\venv\Scripts\activate   # On Windows
+   ```bash
+   cd agents-api
+   python3 -m venv venv
+   source venv/bin/activate  # On Linux/macOS
+   # OR
+   .\venv\Scripts\activate   # On Windows
 
-poetry install
-poetry run uvicorn main:app --reload --workers 7
-```
+   poetry install
+   poetry run uvicorn main:app --reload --workers 7
+   ```
 
 The API will be available at `http://127.0.0.1:8000/`
 
@@ -137,11 +136,11 @@ The API will be available at `http://127.0.0.1:8000/`
 
 To test the application in a containerized environment:
 
-```bash
-# Using Docker directly
-docker build -t multi-agent:1 .
-docker run -p 8000:8000 multi-agent:1
-```
+   ```bash
+   # Using Docker directly
+   docker build -t multi-agent:1 .
+   docker run -p 8000:8000 multi-agent:1
+   ```
 
 This will build and run the container locally, making the API available at `http://localhost:8000/`
 
@@ -160,16 +159,16 @@ To remove all deployed resources from your AWS account:
 
 1. Delete the CloudFormation stack:
 
-```bash
-cdk destroy
-```
+   ```bash
+   cdk destroy
+   ```
 
 2. Manually delete the `Deploy-MultiAgentProjectStack` from the CloudFormation console. 
 3. Empty and delete the S3 bucket that starts with `multiagenttoolchainstack-`
 
 ## FAQ
 
-### How do I make changes to the project after initial deployment?
+1. How do I make changes to the project after initial deployment?
 
 This project uses AWS CodePipeline for continuous integration and deployment:
 
@@ -177,7 +176,7 @@ This project uses AWS CodePipeline for continuous integration and deployment:
 - The CodePipeline (`MultiAgentProjectPipeline`) handles building, testing, and deploying both frontend and backend components
 - This CI/CD integration makes it easy to iterate on your code without manual redeployment steps
 
-### Why aren't my UI updates showing in the browser?
+2. Why aren't my UI updates showing in the browser?
 
 If UI updates are not reflecting in CloudFront, you may need to invalidate the cache:
 
